@@ -77,17 +77,14 @@ class Trongate_tokens extends Trongate {
     }
 
     /**
-     * Issue a new CSRF token for the current session and return it.
+     * Issue a new CSRF token for the current session.
      *
      * Called when authentication changes hands, so a token seen before login is
      * worthless afterwards. Kept separate from rotate_session_id() because not
      * every rotation should invalidate a token an open panel is holding.
-     *
-     * @return string The new token.
      */
-    public function renew_csrf_token(): string {
+    public function renew_csrf_token(): void {
         $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-        return $_SESSION['csrf_token'];
     }
 
     /**
